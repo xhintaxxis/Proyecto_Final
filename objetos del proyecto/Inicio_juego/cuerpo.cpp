@@ -13,19 +13,125 @@ void cuerpo::proyectil()
     scene()->addItem(bala);
 }
 
-cuerpo::cuerpo(float px_, float py_, float vx_, float vy_, int modelo_, QGraphicsScene* scene, QGraphicsItem *carr):QGraphicsPixmapItem(carr)
+cuerpo::cuerpo(float px_,float py_, float vx_, float vy_, int modelo_,QGraphicsScene * scene, QGraphicsItem* carr):QGraphicsPixmapItem(carr)
 {
     modelo_=0;
     modefi=new Fisica(px_,py_,vx_,vy_,modelo_);
     setPixmap(QPixmap(":/images/New Piskel.png"));
+    setPos(px_,py_);
+    corazon * heart= new corazon(0);
+    scene->addItem(heart);
+    energia = new salud(10);
+    scene->addItem(energia);
+    setFlag(QGraphicsItem::ItemIsFocusable);
+    setFocus();
+    QTimer * timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(VerColision()));
+    timer->start(30);
+
 }
 
 void cuerpo::posicionar()
 {
     setPos(modefi->getPx(),modefi->getPy());
+    modefi->setVx(0);
+    modefi->setVy(0);
+
 }
 
 void cuerpo::keyPressEvent(QKeyEvent *event)
 {
+    switch (event->key()) {
+    case  Qt::Key_D:{
+
+        if(modefi->getPx()<500){
+        modefi->setVx(12);
+        modefi->modelos();
+        posicionar();
+        }
+        break;
+    }
+    case  Qt::Key_A:{
+        if(modefi->getPx()>0){
+        modefi->setVx(-12);
+        modefi->modelos();
+        posicionar();
+        }
+        break;
+    }
+    case  Qt::Key_S:{
+        if(modefi->getPy()<435){
+        modefi->setVy(12);
+        modefi->modelos();
+        posicionar();
+        }
+        break;
+    }
+    case  Qt::Key_W:{
+        if(modefi->getPy()>5){
+        modefi->setVy(-12);
+        modefi->modelos();
+        posicionar();
+        }
+        break;
+    }
+    case  Qt::Key_Space:{
+        proyectil();
+        //ui->graphicsView->scale(0.5,0.5);
+        break;
+    }
+    case  Qt::Key_L:{
+//        Disparar();
+//        ui->graphicsView->scale(0.5,0.5);
+        break;
+    }
+    case  Qt::Key_K:{
+//        Disparar();
+//        ui->graphicsView->scale(1.5,1.5);
+        break;
+    }
+    case  Qt::Key_P:{
+        break;
+    }
+    default: break;
+    }
 }
+
+//void cuerpo::VerColision()
+//{
+//    QList<QGraphicsItem *> enemyColision = collidingItems();
+//    for(int i =0 ; i<enemyColision.size();i++){
+//        if(typeid (*(enemyColision.at(i)))==typeid (Enemigo_1)){
+//            scene()->removeItem(enemyColision.at(i));
+//            delete enemyColision.at(i);
+//            energia->dano(1);
+//            return;
+//        }
+//        else if(typeid (*(enemyColision.at(i)))==typeid (enemigo_3)){
+//            scene()->removeItem(enemyColision.at(i));
+//            delete enemyColision.at(i);
+//            energia->dano(2);
+//            qDebug()<<vida;
+//            return;
+//        }
+//        else if(typeid (*(enemyColision.at(i)))==typeid (bomba)){
+//            scene()->removeItem(enemyColision.at(i));
+//            delete enemyColision.at(i);
+//            energia->dano(1);
+//            return;
+//        }
+//        else if(typeid (*(enemyColision.at(i)))==typeid (rayoE)){
+//            scene()->removeItem(enemyColision.at(i));
+//            delete enemyColision.at(i);
+//            energia->dano(1);
+//            return;
+//        }
+//        else if(typeid (*(enemyColision.at(i)))==typeid (enemigo_3)){
+//            scene()->removeItem(enemyColision.at(i));
+//            delete enemyColision.at(i);
+//            energia->dano(5);
+//            return;
+//        }
+//    }
+//}
 

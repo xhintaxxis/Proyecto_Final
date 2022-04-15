@@ -17,10 +17,36 @@ rayo::rayo(float px_, float py_, float vx_, float vy_, int modelo_, QGraphicsIte
 void rayo::mover()
 {
    uniforme->modelos();
+   QList<QGraphicsItem*> enemyfall=collidingItems();
+   //qDebug()<<enemyfall.size();
+
+   for(int i =0 ; i<enemyfall.size();i++){
+       if(typeid (*(enemyfall.at(i)))==typeid (Enemigo_1)){
+         scene()->removeItem(enemyfall.at(i));
+         delete enemyfall.at(i);
+
+           scene()->removeItem(this);
+           delete  this;
+           return;
+       }
+       else if(typeid (*(enemyfall.at(i)))==typeid (enemigo_3)){
+           scene()->removeItem(enemyfall.at(i));
+           delete enemyfall.at(i);
+             scene()->removeItem(this);
+             delete  this;
+             return;
+       }
+   }
    setPos(uniforme->getPx(),uniforme->getPy());
    if(uniforme->getPx()-pxi>450){
        scene()->removeItem(this);
        delete this;
+       return;
    }
 
+}
+
+bool rayo::getVacio() const
+{
+    return vacio;
 }

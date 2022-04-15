@@ -1,33 +1,24 @@
-#include "jugador.h"
+﻿#include "jugador.h"
 #include "QKeyEvent"
-#include <QGraphicsScene>
 
-jugador::jugador(QGraphicsItem *parent)
+jugador::jugador(QGraphicsScene *scene, QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 {
-    uniforme= new Fisica(0,250,0,0,0);
-}
-void jugador::keyPressEvent(QKeyEvent *event){
-    qDebug()<<"entra";
-    setPos(500,0);
-    switch (event->key()) {
-    case  Qt::Key_D:{
-        uniforme->setVx(3);
-        uniforme->modelos();
-        setPos(uniforme->getPx()+5,uniforme->getPy());
-        break;
-    }
-    case  Qt::Key_A:{
-        uniforme->setVx(-3);
-        uniforme->modelos();
-        setPos(uniforme->getPx()-5,uniforme->getPy());
-        break;
-    }
-    default: break;
-    }
+    modefi = new Fisica(0,250,0,0,0);
+    setPixmap(QPixmap(":/images/New Piskel.png"));
+    setPos(90,90);
+    heart = new corazon();
+    scene->addItem(heart);
+
+    //energia = new salud(10);
+//    scene()->addItem(energia);
+//    QTimer * timer = new QTimer();
+//    connect(timer,SIGNAL(timeout()),this,SLOT(VerColision()));
+    //    timer->start(30);
 }
 
-Fisica *jugador::getUniforme() const
+void jugador::garbage()
 {
-    return uniforme;
+    free(heart);
+
 }
 

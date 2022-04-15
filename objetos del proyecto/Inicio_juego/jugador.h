@@ -1,20 +1,29 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
-#include <QGraphicsRectItem>
+#include<QGraphicsItem>
+#include <QGraphicsScene>
 #include <QObject>
-#include <QGraphicsItem>
+#include <QGraphicsPixmapItem>
+#include "rayo.h"
 #include "fisica.h"
+#include "QList"
 #include <QDebug>
-class jugador:public QObject, public QGraphicsRectItem
+#include "salud.h"
+#include "corazon.h"
+#include <QKeyEvent>
+#include <QGraphicsScene>
+class jugador:QObject,
+        public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    jugador(QGraphicsItem * parent=0);
-    void keyPressEvent(QKeyEvent * event);
-    Fisica *getUniforme() const;
-
+    jugador(QGraphicsScene* scene,QGraphicsItem * parent=0);
+    void garbage();
 private:
-    Fisica * uniforme;
+    Fisica  * modefi;
+    int vida=10;
+    salud * energia;
+    corazon * heart;
 };
 
 #endif // JUGADOR_H

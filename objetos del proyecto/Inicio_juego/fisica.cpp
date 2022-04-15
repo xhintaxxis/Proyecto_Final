@@ -50,8 +50,8 @@ void Fisica::modelos()
     //Parabolico
     else if(modelo==1){
         px=px+vx;
-        vy=vy-0.2*0.5;
-        py=py+vy-(0.2/2)*0.5;
+        vy=vy+0.2*0.5;
+        py=py+vy+(0.2/2)*0.5;
     }
     //Oscilatorio
     else if(modelo==2){
@@ -59,10 +59,10 @@ void Fisica::modelos()
         py=(Ampli*cos(px*0.03))+pyi;
     }
     else if(modelo==3){
-        static float theta=0.05;
+        static float theta=0.01;
         px=300*cos(theta)+400;
         py=200*sin(theta)+200;
-        theta+=0.05;
+        theta+=0.01;
     }
 }
 

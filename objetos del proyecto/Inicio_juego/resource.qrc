@@ -6,5 +6,11 @@
         <file>images/e_3.png</file>
         <file>images/bolafuego.png</file>
         <file>images/bomba.png</file>
+        <file>images/bala enemiga.png</file>
+        <file>images/corazon.png</file>
+        <file>images/titulo.png</file>
+        <file>images/e_2.png</file>
+        <file>images/fondo portada.png</file>
+        <file>images/fondo cambio de nivel.jpg</file>
     </qresource>
 </RCC>

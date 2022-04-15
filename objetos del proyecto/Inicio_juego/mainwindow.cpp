@@ -9,25 +9,33 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new QGraphicsScene(this);
     scene->setSceneRect(0,0,900,480);
     ui->graphicsView->setScene(scene);
-    scene->addRect(scene->sceneRect());
-    nave = new cuerpo(0,0,0,0,0,scene);
-    setFixedSize(900,480);
-    cuadro = new QGraphicsRectItem(0,0,20,20);
-    scene->addItem(cuadro);
-    nave->posicionar();
-    scene->addItem(nave);
-    enemy = new Enemigo_1(0,-50,5,2,0);
-    scene->addItem(enemy);
-    nave1=new jugador();
-    enemy2 = new enemigo_3(0,50,50);
-    scene->addItem(enemy2);
-    nave1->setRect(nave1->getUniforme()->getPx(),nave1->getUniforme()->getPy(),100,100);
-    scene->addItem(nave1);
-    ball = new bolafuego();
-    scene->addItem(ball);
-    timer = new QTimer();
-    connect(timer,SIGNAL(timeout()),this,SLOT(moverPruebas()));
-    timer->start(10);
+
+        botton * playboton = new botton(QString("Nueva Partida"));
+        int xj = this->width()/2 -playboton->boundingRect().width()/2;
+        playboton->setPos(xj,240);
+        scene->addItem(playboton);
+
+        botton * loadboton = new botton(QString("Cargar"));
+        int xl = this->width()/2 -loadboton->boundingRect().width()/2;
+        loadboton->setPos(xl,320);
+        scene->addItem(loadboton);
+
+        botton * quitButton = new botton(QString("Salir"));
+        int qxPos = this->width()/2 -quitButton->boundingRect().width()/2;
+        quitButton->setPos(qxPos,400);
+        //connect(quitButton,SIGNAL(clicked()),this,SLOT(close()));
+        scene->addItem(quitButton);
+        ui->graphicsView->setBackgroundBrush(QBrush((QImage(":/images/fondo portada.png"))));
+        titulo = new QGraphicsPixmapItem();
+        titulo->setPixmap(QPixmap(":/images/titulo.png"));
+        titulo->setPos(294,100);
+        scene->addItem(titulo);
+        connect(playboton,SIGNAL(click()),this,SLOT(pre1()));
+        connect(quitButton,SIGNAL(click()),this,SLOT(close()));
+          nave= new cuerpo(200,200,0,0,0,scene);
+          scene->addItem(nave);
+          nave->setFlag(QGraphicsItem::ItemIsFocusable);
+          nave->setFocus();
 
 }
 
@@ -36,66 +44,33 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-    switch (event->key()) {
-    case  Qt::Key_D:{
-        nave->getModefi()->setVx(7);
-        nave->getModefi()->modelos();
-        //nave->setPos(nave->getModefi()->getPx(),nave->getModefi()->getPy());
-        nave->posicionar();
-        break;
-    }
-    case  Qt::Key_A:{
-        nave->getModefi()->setVx(-7);
-        nave->getModefi()->modelos();
-        //nave->setPos(nave->getModefi()->getPx(),nave->getModefi()->getPy());
-        nave->posicionar();
-        break;
-    }
-    case  Qt::Key_S:{
-        nave->getModefi()->setVy(7);
-        nave->getModefi()->modelos();
-        //nave->setPos(nave->getModefi()->getPx(),nave->getModefi()->getPy());
-        nave->posicionar();
-        break;
-    }
-    case  Qt::Key_W:{
-        nave->getModefi()->setVy(-7);
-        nave->getModefi()->modelos();
-        //nave->setPos(nave->getModefi()->getPx(),nave->getModefi()->getPy());
-        nave->posicionar();
-        break;
-    }
-    case  Qt::Key_Space:{
-        nave->proyectil();
-        ui->graphicsView->scale(0.5,0.5);
-        break;
-    }
-    default: break;
-    }
-    nave->getModefi()->setVx(0);
-    nave->getModefi()->setVy(0);
-}
+
 
 void MainWindow::moverPruebas()
 {
-    //enemy->getMovimiento()->modelos();
-    //enemy->posicionar();
-    static int cont=0;
-    if (cont%3==0){
-        enemy->getMovimiento()->modelos();
-        enemy->posicionar();
-        //ball->posicionar();
-        //cont=0;
-        if(cont%6==0){ball->posicionar();}
-        if(cont==300){
-            timer->stop();
-        }
-    }
-    enemy2->getOscilacion()->modelos();
-    enemy2->posicionar();
-    cont++;
-    qDebug()<<"entra";
+//    int pyie1[]={100,200,500};
+//    srand(time(NULL));
+//    float pye3 = 50 + rand()%(400-50);
+//    float pye1 =rand()%100;
+//   qDebug()<<pye3;
+//   qDebug()<<pye1;
+//    enemy = new Enemigo_1(1000,pye1,-5,0,0,1,0);
+//    scene->addItem(enemy);
+//    enemy2 = new enemigo_3(0,pye3,50);
+//    scene->addItem(enemy2);
+
+}
+
+void MainWindow::escena_1()
+{
+
+}
+
+void MainWindow::pre1()
+{
+    scene->removeItem(nave);
+    free(nave);
+    scene->clear();
+    ui->graphicsView->setBackgroundBrush(QBrush((QImage(":/images/fondo cambio de nivel.jpg"))));
 }
 
