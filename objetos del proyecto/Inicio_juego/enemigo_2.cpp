@@ -20,7 +20,6 @@ void enemigo_2::posicionar()
             vida--;
             scene()->removeItem(enemy2col.at(i));
             delete enemy2col.at(i);
-            qDebug()<<"colision";
         }
     }
     if (vida==0){

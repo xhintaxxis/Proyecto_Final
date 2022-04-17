@@ -15,6 +15,10 @@ private:
     int modelo;
     float Ampli=0;
     float pyi=0;
+    float Amplix=0;
+    float Ampliy=0;
+    float cx=0;
+    float cy=0;
 public:
     Fisica(float px_,float py_, float vx_, float vy_,int modelo_);
     Fisica(float px_,float py_,float Ampli_);

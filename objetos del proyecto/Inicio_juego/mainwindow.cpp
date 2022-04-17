@@ -124,11 +124,24 @@ void MainWindow::gameOver()
         if(boss1->vida<1){
             scene->removeItem(boss1);
             delete boss1;
+            //delete  nave;
             passBoss=0;
             scene->clear();
             saveScene();
             lose->stop();
         }
+    }
+    if(passBoss==2){
+        if(boss2->vida<1){
+            scene->removeItem(boss2);
+            delete boss2;
+            //delete  nave;
+            passBoss=0;
+            scene->clear();
+            saveScene();
+            lose->stop();
+        }
+
     }
 }
 
@@ -157,6 +170,7 @@ void MainWindow::menu()
     scene->addItem(titulo);
     connect(playboton,SIGNAL(click()),this,SLOT(pre1()));
     connect(quitButton,SIGNAL(click()),this,SLOT(close()));
+    connect(loadboton,SIGNAL(click()),this,SLOT(cargar()));
 }
 
 void MainWindow::scenaBoss1()
@@ -165,6 +179,15 @@ void MainWindow::scenaBoss1()
     scene->addItem(boss1);
     jefe1timer->stop();
     passBoss=1;
+    scen1->stop();
+}
+
+void MainWindow::scenaBoss2()
+{
+    boss2 = new jefe2();
+    scene->addItem(boss2);
+    jefe1timer->stop();
+    passBoss=2;
     scen1->stop();
 }
 
@@ -221,13 +244,48 @@ void MainWindow::escena_2()
     connect(lose,SIGNAL(timeout()),this,SLOT(gameOver()));
     lose->start(60);
     jefe1timer= new QTimer();
-    connect( jefe1timer,SIGNAL(timeout()),this,SLOT());
-    jefe1timer->start(1000000);
+    connect( jefe1timer,SIGNAL(timeout()),this,SLOT(scenaBoss2()));
+    jefe1timer->start(1000);
+//    jefe2 * boss2 = new jefe2();
+//    scene->addItem(boss2);
 }
 
 void MainWindow::save()
 {
 
+}
+
+void MainWindow::cargar()
+{
+    QString nombre;
+    QString password;
+    QString info;
+    QString stage;
+    QFile file("C:/Users/Angel/OneDrive/Documentos/C++/Laboratorio_4/Inicio_juego/cargar.txt");
+    file.open(QIODevice::ReadOnly);
+    info= file.readLine();
+    int n=0;
+    while(true){
+        nombre.append(info.at(n));
+        n++;
+        if (info.at(n)==char(44)){
+            break;
+        }
+    }
+    n=n+1;
+    while(true){
+        password.append(info.at(n));
+        n++;
+        if (info.at(n)==char(44)){
+            break;
+        }
+    }
+    stage=info.at(n+1);
+    int area=stage.toInt();
+    qDebug()<<info;
+    qDebug()<<nombre;
+    qDebug()<<password;
+    qDebug()<<area;;
 }
 
 void MainWindow::enemigosS2()

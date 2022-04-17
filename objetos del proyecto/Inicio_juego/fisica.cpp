@@ -84,3 +84,4 @@ Fisica::Fisica(){
     py=200;
 }
 
+
