@@ -19,9 +19,12 @@ SOURCES += \
     enemigo_2.cpp \
     enemigo_3.cpp \
     fisica.cpp \
+    jefe1.cpp \
+    jefe2.cpp \
     jugador.cpp \
     main.cpp \
     mainwindow.cpp \
+    obstaculo.cpp \
     rayo.cpp \
     rayoe.cpp \
     salud.cpp
@@ -36,8 +39,11 @@ HEADERS += \
     enemigo_2.h \
     enemigo_3.h \
     fisica.h \
+    jefe1.h \
+    jefe2.h \
     jugador.h \
     mainwindow.h \
+    obstaculo.h \
     rayo.h \
     rayoe.h \
     salud.h

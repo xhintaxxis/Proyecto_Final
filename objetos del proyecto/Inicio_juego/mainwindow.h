@@ -22,6 +22,8 @@
 #include <QFont>
 #include <QImage>
 #include <QBrush>
+#include <jefe1.h>
+#include <obstaculo.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -37,6 +39,15 @@ public slots:
     void moverPruebas();
     void escena_1();
     void pre1();
+    void enemigosS1();
+    void enemigosS2();
+    void gameOver();
+    void menu();
+    void scenaBoss1();
+    void saveScene();
+    void pre2();
+    void escena_2();
+    void save();
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
@@ -44,11 +55,24 @@ private:
     cuerpo * nave;
     jugador * nave1;
     Enemigo_1 * enemy;
-    enemigo_3 * enemy2;
+    Enemigo_1 * enemy12;
+    enemigo_2 * enemy2;
+    enemigo_3 * enemy3;
     bolafuego * ball;
     QGraphicsPixmapItem * titulo;
-
+    QGraphicsPixmapItem  * stage1;
+    botton * comenzar;
+    QTimer * scen1;
+    QTimer * lose;
+    QTimer * jefe1timer;
+    int cambio=1;
     int nume1=1;
+    jefe1 * boss1;
+    int passBoss ;
+    botton * guardar;
+    botton * next_level;
+    QGraphicsPixmapItem  * completado;
+
 signals:
     void tecla();
 

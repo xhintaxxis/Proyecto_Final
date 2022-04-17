@@ -9,11 +9,11 @@ jugador::jugador(QGraphicsScene *scene, QGraphicsItem *parent):QGraphicsPixmapIt
     heart = new corazon();
     scene->addItem(heart);
 
-    //energia = new salud(10);
-//    scene()->addItem(energia);
+//    energia = new salud(10);
+//    scene->addItem(energia);
 //    QTimer * timer = new QTimer();
 //    connect(timer,SIGNAL(timeout()),this,SLOT(VerColision()));
-    //    timer->start(30);
+//    timer->start(30);
 }
 
 void jugador::garbage()

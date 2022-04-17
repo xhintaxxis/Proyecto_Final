@@ -14,12 +14,12 @@ Enemigo_1::Enemigo_1(float px_, float py_, float vx_, float vy_, int modelo_,int
     if (douP==0){
         QTimer * timerP = new QTimer();
         connect(timerP,SIGNAL(timeout()),this,SLOT(proyectil()));
-        timerP->start(2000);
+        timerP->start(1000);
     }
     else{
         QTimer * timerP = new QTimer();
         connect(timerP,SIGNAL(timeout()),this,SLOT(douProyectil()));
-        timerP->start(2000);
+        timerP->start(1000);
     }
 }
 

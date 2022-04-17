@@ -9,7 +9,7 @@ Fisica *cuerpo::getModefi() const
 void cuerpo::proyectil()
 {
     rayo * bala;
-    bala = new rayo(modefi->getPx()+70,modefi->getPy()+7,8,0,0);
+    bala = new rayo(modefi->getPx()+110,modefi->getPy()+20,8,0,0);
     scene()->addItem(bala);
 }
 
@@ -17,7 +17,7 @@ cuerpo::cuerpo(float px_,float py_, float vx_, float vy_, int modelo_,QGraphicsS
 {
     modelo_=0;
     modefi=new Fisica(px_,py_,vx_,vy_,modelo_);
-    setPixmap(QPixmap(":/images/New Piskel.png"));
+    setPixmap(QPixmap(":/images/nave.png"));
     setPos(px_,py_);
     corazon * heart= new corazon(0);
     scene->addItem(heart);
@@ -26,6 +26,7 @@ cuerpo::cuerpo(float px_,float py_, float vx_, float vy_, int modelo_,QGraphicsS
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
     QTimer * timer = new QTimer();
+    vida=energia->getVida();
     connect(timer,SIGNAL(timeout()),this,SLOT(VerColision()));
     timer->start(30);
 
@@ -97,41 +98,56 @@ void cuerpo::keyPressEvent(QKeyEvent *event)
     }
 }
 
-//void cuerpo::VerColision()
-//{
-//    QList<QGraphicsItem *> enemyColision = collidingItems();
-//    for(int i =0 ; i<enemyColision.size();i++){
-//        if(typeid (*(enemyColision.at(i)))==typeid (Enemigo_1)){
-//            scene()->removeItem(enemyColision.at(i));
-//            delete enemyColision.at(i);
-//            energia->dano(1);
-//            return;
-//        }
-//        else if(typeid (*(enemyColision.at(i)))==typeid (enemigo_3)){
-//            scene()->removeItem(enemyColision.at(i));
-//            delete enemyColision.at(i);
-//            energia->dano(2);
-//            qDebug()<<vida;
-//            return;
-//        }
-//        else if(typeid (*(enemyColision.at(i)))==typeid (bomba)){
-//            scene()->removeItem(enemyColision.at(i));
-//            delete enemyColision.at(i);
-//            energia->dano(1);
-//            return;
-//        }
-//        else if(typeid (*(enemyColision.at(i)))==typeid (rayoE)){
-//            scene()->removeItem(enemyColision.at(i));
-//            delete enemyColision.at(i);
-//            energia->dano(1);
-//            return;
-//        }
-//        else if(typeid (*(enemyColision.at(i)))==typeid (enemigo_3)){
-//            scene()->removeItem(enemyColision.at(i));
-//            delete enemyColision.at(i);
-//            energia->dano(5);
-//            return;
-//        }
-//    }
-//}
+void cuerpo::menu()
+{
+
+}
+
+void cuerpo::VerColision()
+{
+    QList<QGraphicsItem *> enemyColision = collidingItems();
+    for(int i =0 ; i<enemyColision.size();i++){
+        if(typeid (*(enemyColision.at(i)))==typeid (Enemigo_1)){
+            scene()->removeItem(enemyColision.at(i));
+            delete enemyColision.at(i);
+            energia->dano(1);
+            return;
+        }
+        else if(typeid (*(enemyColision.at(i)))==typeid (enemigo_3)){
+            scene()->removeItem(enemyColision.at(i));
+            delete enemyColision.at(i);
+            energia->dano(2);
+            qDebug()<<vida;
+            return;
+        }
+        else if(typeid (*(enemyColision.at(i)))==typeid (bomba)){
+            scene()->removeItem(enemyColision.at(i));
+            delete enemyColision.at(i);
+            energia->dano(1);
+            return;
+        }
+        else if(typeid (*(enemyColision.at(i)))==typeid (rayoE)){
+            scene()->removeItem(enemyColision.at(i));
+            delete enemyColision.at(i);
+            energia->dano(1);
+            return;
+        }
+        else if(typeid (*(enemyColision.at(i)))==typeid (enemigo_2)){
+            scene()->removeItem(enemyColision.at(i));
+            delete enemyColision.at(i);
+            energia->dano(5);
+            return;
+        }
+        else if(typeid (*(enemyColision.at(i)))==typeid (Obstaculo)){
+            scene()->removeItem(enemyColision.at(i));
+            delete enemyColision.at(i);
+            energia->dano(3);
+            return;
+        }
+    }
+    vida=energia->getVida();
+    if (energia==0){
+        emit lose();
+    }
+}
 

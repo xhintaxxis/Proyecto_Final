@@ -27,6 +27,7 @@ botton::botton(QString name, QGraphicsItem * parent)
 void botton::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     emit click();
+
 }
 
 void botton::hoverEnterEvent(QGraphicsSceneHoverEvent *event)

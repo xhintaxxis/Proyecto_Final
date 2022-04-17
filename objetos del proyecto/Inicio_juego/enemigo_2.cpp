@@ -7,7 +7,7 @@ enemigo_2::enemigo_2(float px_, float py_, float vx_, float vy_, int modelo_, QG
     this->setPos(px_,py_);
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(posicionar()));
-    timer->start(10);
+    timer->start(30);
 }
 
 void enemigo_2::posicionar()
