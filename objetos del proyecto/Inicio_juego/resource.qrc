@@ -23,5 +23,8 @@
         <file>images/cueva.jpg</file>
         <file>images/obstaculo.png</file>
         <file>images/jefe2.png</file>
+        <file>images/fondosesion.jpg</file>
+        <file>texto/cargar.txt</file>
+        <file>texto/usuarios.txt</file>
     </qresource>
 </RCC>

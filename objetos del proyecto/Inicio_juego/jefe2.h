@@ -17,7 +17,7 @@ class jefe2:QObject,
 public:
     jefe2(QGraphicsItem* carr = 0);
     void fisica();
-    int vida=1;
+    int vida=70;
 public slots:
     void posicionar();
     void proyectiles();

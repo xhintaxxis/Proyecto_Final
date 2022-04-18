@@ -19,6 +19,7 @@ SOURCES += \
     enemigo_2.cpp \
     enemigo_3.cpp \
     fisica.cpp \
+    iniciosesion.cpp \
     jefe1.cpp \
     jefe2.cpp \
     jugador.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     enemigo_2.h \
     enemigo_3.h \
     fisica.h \
+    iniciosesion.h \
     jefe1.h \
     jefe2.h \
     jugador.h \
@@ -49,6 +51,7 @@ HEADERS += \
     salud.h
 
 FORMS += \
+    iniciosesion.ui \
     mainwindow.ui
 
 # Default rules for deployment.

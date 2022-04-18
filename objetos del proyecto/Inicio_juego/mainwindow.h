@@ -26,6 +26,7 @@
 #include <jefe2.h>
 #include <obstaculo.h>
 #include <QFile>
+#include <iniciosesion.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -52,6 +53,8 @@ public slots:
     void escena_2();
     void save();
     void cargar();
+    void preMenu();
+    void preLoad();
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
@@ -77,6 +80,11 @@ private:
     botton * guardar;
     botton * next_level;
     QGraphicsPixmapItem  * completado;
+    int escena=0;
+    int posicion=0;
+    inicioSesion * ventana;
+    QList<QString> loadline;
+    QByteArray write;
 
 signals:
     void tecla();

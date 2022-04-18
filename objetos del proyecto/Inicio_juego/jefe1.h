@@ -14,7 +14,7 @@ class jefe1:QObject,
     Q_OBJECT
 public:
     jefe1(float px_, float py_, float vx_, float vy_, int modelo_, QGraphicsItem *carr=0);
-    int vida=1;
+    int vida=40;
 public slots:
     void posicionar();
     void proyectil();

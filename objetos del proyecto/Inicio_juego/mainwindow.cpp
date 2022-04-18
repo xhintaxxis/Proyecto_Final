@@ -9,7 +9,13 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new QGraphicsScene(this);
     scene->setSceneRect(0,0,900,480);
     ui->graphicsView->setScene(scene);
-    menu();
+    show();
+    ventana = new inicioSesion();
+    ventana->show();
+    connect(ventana,SIGNAL(aceptar()),this,SLOT(preMenu()));
+//    ventana->close();
+//    delete ventana;
+//    menu();
 }
 
 MainWindow::~MainWindow()
@@ -49,12 +55,13 @@ void MainWindow::escena_1()
     lose->start(60);
     jefe1timer= new QTimer();
     connect( jefe1timer,SIGNAL(timeout()),this,SLOT(scenaBoss1()));
-    jefe1timer->start(1000);
+    jefe1timer->start(80000);
 
 }
 
 void MainWindow::pre1()
 {
+    escena=1;
     delete titulo;
     scene->clear();
     ui->graphicsView->setBackgroundBrush(QBrush((QImage(":/images/oceno.gif"))));
@@ -127,8 +134,10 @@ void MainWindow::gameOver()
             //delete  nave;
             passBoss=0;
             scene->clear();
+            escena=2;
             saveScene();
             lose->stop();
+
         }
     }
     if(passBoss==2){
@@ -245,47 +254,113 @@ void MainWindow::escena_2()
     lose->start(60);
     jefe1timer= new QTimer();
     connect( jefe1timer,SIGNAL(timeout()),this,SLOT(scenaBoss2()));
-    jefe1timer->start(1000);
+    jefe1timer->start(40000);
 //    jefe2 * boss2 = new jefe2();
 //    scene->addItem(boss2);
 }
 
 void MainWindow::save()
 {
+    QFile file;
+    file.setFileName("C:/Users/Angel/OneDrive/Documentos/C++/Laboratorio_4/Inicio_juego/texto/cargar.txt");
+   // QFile file(":/texto/cargar.txt");
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    for(int i=0;i<loadline.size();i++){
+        if(i==posicion){
+            if(escena==2){
+               write.append("2");
+             }
+            else if(escena==3){
+               write.append("3");
+             }
+        }
+        else{
+            write.append((loadline.at(i).toStdString()));
+        }
+
+    }
+    for(int i = 0;i<write.size();i++){
+        qDebug()<<write.at(i);
+    }
+    write.append(",");
+    qDebug()<<write;
+    file.write(write);
+    file.close();
 
 }
 
 void MainWindow::cargar()
 {
-    QString nombre;
-    QString password;
+
+    if(escena==1){
+        pre1();
+    }
+    if(escena==2){
+        pre2();
+    }
+
+}
+
+//    QString nombre;
+//    QString password;
+//    QString info;
+//    QString stage;
+//    QFile file("C:/Users/Angel/OneDrive/Documentos/C++/Laboratorio_4/Inicio_juego/cargar.txt");
+//    file.open(QIODevice::ReadOnly);
+//    info= file.readLine();
+//    int n=0;
+//    while(true){
+//        nombre.append(info.at(n));
+//        n++;
+//        if (info.at(n)==char(44)){
+//            break;
+//        }
+//    }
+//    n=n+1;
+//    while(true){
+//        password.append(info.at(n));
+//        n++;
+//        if (info.at(n)==char(44)){
+//            break;
+//        }
+//    }
+//    stage=info.at(n+1);
+//    int area=stage.toInt();
+//    qDebug()<<info;
+//    qDebug()<<nombre;
+//    qDebug()<<password;
+//    qDebug()<<area;
+//}
+
+void MainWindow::preMenu()
+{
+    posicion=ventana->nivel;
+    qDebug()<<posicion;
+    delete ventana;
+    menu();
+    preLoad();
+
+}
+
+void MainWindow::preLoad()
+{
     QString info;
-    QString stage;
-    QFile file("C:/Users/Angel/OneDrive/Documentos/C++/Laboratorio_4/Inicio_juego/cargar.txt");
+    QFile file(":/texto/cargar.txt");
     file.open(QIODevice::ReadOnly);
-    info= file.readLine();
+    info = file.readLine();
     int n=0;
-    while(true){
-        nombre.append(info.at(n));
-        n++;
-        if (info.at(n)==char(44)){
+    while (true){
+        if(info.at(n)==char(44)){
             break;
         }
-    }
-    n=n+1;
-    while(true){
-        password.append(info.at(n));
+        loadline.append(info.at(n));
+        //qDebug()<<loadline.at(n);
         n++;
-        if (info.at(n)==char(44)){
-            break;
-        }
     }
-    stage=info.at(n+1);
-    int area=stage.toInt();
-    qDebug()<<info;
-    qDebug()<<nombre;
-    qDebug()<<password;
-    qDebug()<<area;;
+    qDebug()<<loadline.at(posicion);
+    escena=loadline.at(posicion).toInt();
+    file.close();
+
 }
 
 void MainWindow::enemigosS2()
