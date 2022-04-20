@@ -22,6 +22,7 @@ SOURCES += \
     iniciosesion.cpp \
     jefe1.cpp \
     jefe2.cpp \
+    jefe3.cpp \
     jugador.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     iniciosesion.h \
     jefe1.h \
     jefe2.h \
+    jefe3.h \
     jugador.h \
     mainwindow.h \
     obstaculo.h \

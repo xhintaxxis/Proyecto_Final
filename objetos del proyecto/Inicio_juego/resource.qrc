@@ -26,5 +26,8 @@
         <file>images/fondosesion.jpg</file>
         <file>texto/cargar.txt</file>
         <file>texto/usuarios.txt</file>
+        <file>images/nocturnoespacio.jpg</file>
+        <file>images/area 3.png</file>
+        <file>images/jefe3.png</file>
     </qresource>
 </RCC>

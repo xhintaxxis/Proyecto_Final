@@ -23,6 +23,7 @@ public slots:
 private:
     Fisica * movimiento;
     bool Cambio = false;
+    double amplitud = 0;
 };
 
 #endif // ENEMIGO_1_H

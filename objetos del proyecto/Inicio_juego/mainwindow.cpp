@@ -55,7 +55,7 @@ void MainWindow::escena_1()
     lose->start(60);
     jefe1timer= new QTimer();
     connect( jefe1timer,SIGNAL(timeout()),this,SLOT(scenaBoss1()));
-    jefe1timer->start(80000);
+    jefe1timer->start(60000);
 
 }
 
@@ -84,7 +84,7 @@ void MainWindow::enemigosS1()
         scene->addItem(enemy);
         enemy12 = new Enemigo_1(1000,410,-10,0,0,0,0);
         scene->addItem(enemy12);
-        enemy2 =new enemigo_2(1100,140,-6,0,0);
+        enemy2 =new enemigo_2(900,70,-3,0,0);
         scene->addItem(enemy2);
         cambio=2;
     }
@@ -104,9 +104,9 @@ void MainWindow::enemigosS1()
 
     else if(cambio==3){
             cambio=1;
-            enemy2 =new enemigo_2(1100,50,-11,0,0);
+            enemy2 =new enemigo_2(900,50,-11,0,0);
             scene->addItem(enemy2);
-            enemigo_2 * enemy21 =new enemigo_2(1100,230,-11,0,0);
+            enemigo_2 * enemy21 =new enemigo_2(900,230,-11,0,0);
             scene->addItem(enemy21);
     }
 }
@@ -124,7 +124,6 @@ void MainWindow::gameOver()
         lose->stop();
         scene->clear();
         jefe1timer->stop();
-        lose->stop();
         menu();
     }
     if(passBoss==1){
@@ -145,10 +144,13 @@ void MainWindow::gameOver()
             scene->removeItem(boss2);
             delete boss2;
             //delete  nave;
+            //qDebug()<<"termino";
             passBoss=0;
             scene->clear();
-            saveScene();
+            escena=3;
+            saveScene();           
             lose->stop();
+            qDebug()<<"termino";
         }
 
     }
@@ -220,7 +222,13 @@ void MainWindow::saveScene()
     int xs = this->width()/2 -next->boundingRect().width()/2;
     next->setPos(xs,340);
     scene->addItem(next);
-    connect(next,SIGNAL(click()),this,SLOT(pre2()));
+    qDebug()<<escena;
+    if(escena==2){
+        connect(next,SIGNAL(click()),this,SLOT(pre2()));
+    }
+    else if(escena==3){
+        connect(next,SIGNAL(click()),this,SLOT(pre3()));
+    }
 
 
 }
@@ -261,6 +269,7 @@ void MainWindow::escena_2()
 
 void MainWindow::save()
 {
+    write.clear();
     QFile file;
     file.setFileName("C:/Users/Angel/OneDrive/Documentos/C++/Laboratorio_4/Inicio_juego/texto/cargar.txt");
    // QFile file(":/texto/cargar.txt");
@@ -291,46 +300,18 @@ void MainWindow::save()
 
 void MainWindow::cargar()
 {
-
+ escena=loadline.at(posicion).toInt();
     if(escena==1){
         pre1();
     }
     if(escena==2){
         pre2();
     }
-
+    if (escena==3){
+        pre3();
+    }
 }
 
-//    QString nombre;
-//    QString password;
-//    QString info;
-//    QString stage;
-//    QFile file("C:/Users/Angel/OneDrive/Documentos/C++/Laboratorio_4/Inicio_juego/cargar.txt");
-//    file.open(QIODevice::ReadOnly);
-//    info= file.readLine();
-//    int n=0;
-//    while(true){
-//        nombre.append(info.at(n));
-//        n++;
-//        if (info.at(n)==char(44)){
-//            break;
-//        }
-//    }
-//    n=n+1;
-//    while(true){
-//        password.append(info.at(n));
-//        n++;
-//        if (info.at(n)==char(44)){
-//            break;
-//        }
-//    }
-//    stage=info.at(n+1);
-//    int area=stage.toInt();
-//    qDebug()<<info;
-//    qDebug()<<nombre;
-//    qDebug()<<password;
-//    qDebug()<<area;
-//}
 
 void MainWindow::preMenu()
 {
@@ -358,7 +339,6 @@ void MainWindow::preLoad()
         n++;
     }
     qDebug()<<loadline.at(posicion);
-    escena=loadline.at(posicion).toInt();
     file.close();
 
 }
@@ -409,4 +389,44 @@ void MainWindow::enemigosS2()
     }
 
 }
+
+void MainWindow::pre3()
+{
+    scene->clear();
+    ui->graphicsView->setBackgroundBrush(QBrush((QImage(":/images/nocturnoespacio.jpg"))));
+    comenzar = new botton(QString("Comenzar"));
+    int xc = this->width()/2 -comenzar->boundingRect().width()/2;
+    comenzar->setPos(xc,320);
+    scene->addItem(comenzar);
+    stage1 = new QGraphicsPixmapItem();
+    stage1->setPixmap(QPixmap(":/images/area 3.png"));
+    stage1->setPos(120,0);
+    scene->addItem(stage1);
+    connect(comenzar,SIGNAL(click()),this,SLOT(escena_3()));
+}
+
+void MainWindow::escena_3()
+{
+    cambio=1;
+    scene->clear();
+    scen1 = new QTimer();
+    connect(scen1,SIGNAL(timeout()),this,SLOT());
+    scen1->start(3000);
+    nave = new cuerpo(100,230,0,0,0,scene,0);
+    scene->addItem(nave);
+    lose = new QTimer();
+   // connect(lose,SIGNAL(timeout()),this,SLOT(gameOver()));
+    lose->start(60);
+    jefe1timer= new QTimer();
+    connect( jefe1timer,SIGNAL(timeout()),this,SLOT());
+    jefe1timer->start(1000);
+    boss3 = new jefe3(900,0,-3,0,0);
+    scene->addItem(boss3);
+    bolafuego * ballfire = new bolafuego();
+    scene->addItem(ballfire);
+    Enemigo_1 * prueba = new Enemigo_1(900,300,-5,-5,0,0,0);
+    scene->addItem(prueba);
+}
+
+
 

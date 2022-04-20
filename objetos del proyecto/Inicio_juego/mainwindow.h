@@ -24,9 +24,11 @@
 #include <QBrush>
 #include <jefe1.h>
 #include <jefe2.h>
+#include <jefe3.h>
 #include <obstaculo.h>
 #include <QFile>
 #include <iniciosesion.h>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -55,6 +57,8 @@ public slots:
     void cargar();
     void preMenu();
     void preLoad();
+    void pre3();
+    void escena_3();
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
@@ -76,6 +80,7 @@ private:
     int nume1=1;
     jefe1 * boss1;
     jefe2 * boss2;
+    jefe3 * boss3;
     int passBoss ;
     botton * guardar;
     botton * next_level;

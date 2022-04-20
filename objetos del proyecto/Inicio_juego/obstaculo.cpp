@@ -8,6 +8,7 @@ Obstaculo::Obstaculo(float px_, float py_, float vx_, float vy_, int modelo_, QG
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(posicionar()));
     timer->start(30);
+    rotation();
 
 }
 

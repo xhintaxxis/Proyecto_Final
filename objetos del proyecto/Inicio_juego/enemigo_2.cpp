@@ -14,6 +14,25 @@ void enemigo_2::posicionar()
 {
     uniforme->modelos();
     setPos(uniforme->getPx(),uniforme->getPy());
+    if(uniforme->getPx()>750){
+        uniforme->setVy(3);
+    }
+    else if(uniforme->getPx()>600){
+        uniforme->setVy(-3);
+    }
+    else if(uniforme->getPx()>450){
+        uniforme->setVy(3);
+    }
+    else if(uniforme->getPx()>300){
+        uniforme->setVy(-3);
+    }
+//    if(uniforme->getPx()>150){
+//        uniforme->setVy(3);
+//    }
+//    else{
+//        uniforme->setVy(-3);
+//    }
+
     QList<QGraphicsItem * > enemy2col=collidingItems();
     for(int i = 0; i<enemy2col.size();i++){
         if(typeid(*enemy2col.at(i))==typeid (rayo)){

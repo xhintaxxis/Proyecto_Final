@@ -35,13 +35,23 @@ void Enemigo_1::posicionar()
 
 void Enemigo_1::mover()
 {
-
+    amplitud=amplitud+0.1;
+    if(movimiento->getPx()>600){
+       movimiento->setVy(-2);
+    }
+    else if(movimiento->getPx()>300){
+       movimiento->setVy(2);
+    }
+    else {
+       movimiento->setVy(-2);
+    }
     setPos(movimiento->getPx(),movimiento->getPy());
     movimiento->modelos();
     if(movimiento->getPx()<-100){
         scene()->removeItem(this);
         delete this;
     }
+
 }
 
 void Enemigo_1::proyectil()
@@ -63,6 +73,5 @@ void Enemigo_1::douProyectil()
         Cambio=false;
 
     }
-
 }
 
