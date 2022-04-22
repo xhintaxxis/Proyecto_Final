@@ -13,6 +13,8 @@
 #include <QKeyEvent>
 #include <enemigo_2.h>
 #include <obstaculo.h>
+#include <rockreb.h>
+#include <bolafuego.h>
 class cuerpo: QObject,
         public QGraphicsPixmapItem
 {

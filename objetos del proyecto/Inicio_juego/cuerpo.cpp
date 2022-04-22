@@ -30,7 +30,7 @@ cuerpo::cuerpo(float px_,float py_, float vx_, float vy_, int modelo_,QGraphicsS
     QTimer * timer = new QTimer();
     vida=energia->getVida();
     connect(timer,SIGNAL(timeout()),this,SLOT(VerColision()));
-    timer->start(30);
+    timer->start(44);
 
 }
 
@@ -118,7 +118,7 @@ void cuerpo::VerColision()
         else if(typeid (*(enemyColision.at(i)))==typeid (enemigo_3)){
             scene()->removeItem(enemyColision.at(i));
             delete enemyColision.at(i);
-            energia->dano(2);
+            energia->dano(3);
             qDebug()<<vida;
             return;
         }
@@ -137,13 +137,25 @@ void cuerpo::VerColision()
         else if(typeid (*(enemyColision.at(i)))==typeid (enemigo_2)){
             scene()->removeItem(enemyColision.at(i));
             delete enemyColision.at(i);
-            energia->dano(5);
+            energia->dano(4);
             return;
         }
         else if(typeid (*(enemyColision.at(i)))==typeid (Obstaculo)){
             scene()->removeItem(enemyColision.at(i));
             delete enemyColision.at(i);
             energia->dano(3);
+            return;
+        }
+        else if(typeid (*(enemyColision.at(i)))==typeid (rockreb)){
+            scene()->removeItem(enemyColision.at(i));
+            delete enemyColision.at(i);
+            energia->dano(1);
+            return;
+        }
+        else if(typeid (*(enemyColision.at(i)))==typeid (bolafuego)){
+            scene()->removeItem(enemyColision.at(i));
+            delete enemyColision.at(i);
+            energia->dano(1);
             return;
         }
     }

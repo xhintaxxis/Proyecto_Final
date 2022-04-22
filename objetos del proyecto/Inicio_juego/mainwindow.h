@@ -62,6 +62,7 @@ public slots:
     void pre3();
     void escena_3();
     void scenaBoss3();
+    void Fin();
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;

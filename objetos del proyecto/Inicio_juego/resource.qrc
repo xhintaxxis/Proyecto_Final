@@ -30,5 +30,6 @@
         <file>images/area 3.png</file>
         <file>images/jefe3.png</file>
         <file>images/rock.png</file>
+        <file>images/textend.png</file>
     </qresource>
 </RCC>

@@ -8,6 +8,7 @@
 #include <QTimer>
 #include "rayo.h"
 #include "rayoe.h"
+#include "bomba.h"
 class jefe1:QObject,
         public QGraphicsPixmapItem
 {
@@ -16,9 +17,12 @@ public:
     jefe1(float px_, float py_, float vx_, float vy_, int modelo_, QGraphicsItem *carr=0);
     int vida=40;
     QList<rayoE *> bala;
+    QList <QTimer*> timers;
+    QList <bomba*> bomb;
 public slots:
     void posicionar();
     void proyectil();
+    void proyectil2();
 private:
     Fisica * uniforme;
     QTimer * timer2;
