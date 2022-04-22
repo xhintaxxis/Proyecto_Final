@@ -8,9 +8,11 @@ Fisica *cuerpo::getModefi() const
 
 void cuerpo::proyectil()
 {
-    rayo * bala;
-    bala = new rayo(modefi->getPx()+110,modefi->getPy()+20,8,0,0);
-    scene()->addItem(bala);
+//    rayo * bala;
+//    bala = new rayo(modefi->getPx()+110,modefi->getPy()+20,8,0,0);
+//    scene()->addItem(bala);
+    bala.append(new rayo(modefi->getPx()+110,modefi->getPy()+20,8,0,0));
+    scene()->addItem(bala.at(bala.size()-1));
 }
 
 cuerpo::cuerpo(float px_,float py_, float vx_, float vy_, int modelo_,QGraphicsScene * scene, QGraphicsItem* carr):QGraphicsPixmapItem(carr)

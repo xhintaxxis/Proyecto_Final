@@ -55,7 +55,7 @@ void Fisica::modelos()
     }
     //Oscilatorio
     else if(modelo==2){
-        px=px+1;
+        px=px+3;
         py=(Ampli*cos(px*0.03))+pyi;
     }
     else if(modelo==3){

@@ -28,6 +28,7 @@
 #include <obstaculo.h>
 #include <QFile>
 #include <iniciosesion.h>
+#include <rockreb.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,6 +47,7 @@ public slots:
     void pre1();
     void enemigosS1();
     void enemigosS2();
+    void enemigosS3();
     void gameOver();
     void menu();
     void scenaBoss1();
@@ -59,17 +61,12 @@ public slots:
     void preLoad();
     void pre3();
     void escena_3();
+    void scenaBoss3();
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     QGraphicsRectItem * cuadro;
     cuerpo * nave;
-    jugador * nave1;
-    Enemigo_1 * enemy;
-    Enemigo_1 * enemy12;
-    enemigo_2 * enemy2;
-    enemigo_3 * enemy3;
-    bolafuego * ball;
     QGraphicsPixmapItem * titulo;
     QGraphicsPixmapItem  * stage1;
     botton * comenzar;
@@ -90,10 +87,10 @@ private:
     inicioSesion * ventana;
     QList<QString> loadline;
     QByteArray write;
-
-signals:
-    void tecla();
-
-
+    QList< Enemigo_1 * >enem1;
+    QList< enemigo_2 * >enem2;
+    QList< enemigo_3 * >enem3;
+    QList< Obstaculo * > obs;
+    QList< rockreb * > roca;
 };
 #endif // MAINWINDOW_H

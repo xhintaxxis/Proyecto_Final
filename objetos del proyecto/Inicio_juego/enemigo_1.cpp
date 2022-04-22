@@ -49,6 +49,8 @@ void Enemigo_1::mover()
     movimiento->modelos();
     if(movimiento->getPx()<-100){
         scene()->removeItem(this);
+        bomb.clear();
+        bala.clear();
         delete this;
     }
 
@@ -56,20 +58,26 @@ void Enemigo_1::mover()
 
 void Enemigo_1::proyectil()
 {
-    bomba * bomba1 = new bomba(movimiento->getPx(),movimiento->getPy(),-7,2,1);
-    scene()->addItem(bomba1);
+      bomb.append(new bomba(movimiento->getPx(),movimiento->getPy(),-7,2,1));
+      scene()->addItem(bomb.at(bomb.size()-1));
+//    bomba * bomba1 = new bomba(movimiento->getPx(),movimiento->getPy(),-7,2,1);
+//    scene()->addItem(bomba1);
 }
 
 void Enemigo_1::douProyectil()
 {
     if(Cambio==false){
-        bomba * bomba1 = new bomba(movimiento->getPx(),movimiento->getPy(),-7,2,1);
-        scene()->addItem(bomba1);
+        bomb.append(new bomba(movimiento->getPx(),movimiento->getPy(),-7,2,1));
+        scene()->addItem(bomb.at(bomb.size()-1));
+//        bomba * bomba1 = new bomba(movimiento->getPx(),movimiento->getPy(),-7,2,1);
+//        scene()->addItem(bomba1);
         Cambio=true;
     }
     else if(Cambio==true){
-        rayoE * bala = new rayoE(movimiento->getPx(),movimiento->getPy()+30,-10,0,0);
-        scene()->addItem(bala);
+        bala.append(new rayoE(movimiento->getPx(),movimiento->getPy()+30,-10,0,0));
+        scene()->addItem(bala.at(bala.size()-1));
+//        rayoE * bala = new rayoE(movimiento->getPx(),movimiento->getPy()+30,-10,0,0);
+//        scene()->addItem(bala);
         Cambio=false;
 
     }

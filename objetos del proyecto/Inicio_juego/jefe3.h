@@ -15,6 +15,8 @@ class jefe3:QObject,
     Q_OBJECT
 public:
     jefe3(float px_, float py_, float vx_, float vy_, int modelo_, QGraphicsItem *carr=0);
+    QList <rayoE *> bala;
+    QList <QTimer *> timers;
 private:
     Fisica * uniforme;
     int cambio=1;

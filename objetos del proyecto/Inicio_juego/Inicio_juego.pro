@@ -29,6 +29,7 @@ SOURCES += \
     obstaculo.cpp \
     rayo.cpp \
     rayoe.cpp \
+    rockreb.cpp \
     salud.cpp
 
 HEADERS += \
@@ -50,6 +51,7 @@ HEADERS += \
     obstaculo.h \
     rayo.h \
     rayoe.h \
+    rockreb.h \
     salud.h
 
 FORMS += \

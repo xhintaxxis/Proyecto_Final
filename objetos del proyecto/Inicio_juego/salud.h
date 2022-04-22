@@ -12,7 +12,7 @@ public:
     int getVida() const;
 
 private:
-    int vida=20;
+    int vida=50;
 
 };
 

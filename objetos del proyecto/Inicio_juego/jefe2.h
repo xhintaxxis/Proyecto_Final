@@ -18,6 +18,8 @@ public:
     jefe2(QGraphicsItem* carr = 0);
     void fisica();
     int vida=70;
+    QList<bomba *> bomb;
+    QList<rayoE *>bala;
 public slots:
     void posicionar();
     void proyectiles();

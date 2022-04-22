@@ -30,6 +30,7 @@ public:
     void posicionar();
     void keyPressEvent(QKeyEvent *event);
     void menu();
+    QList<rayo * > bala;
 public slots:
    void VerColision();
 signals:

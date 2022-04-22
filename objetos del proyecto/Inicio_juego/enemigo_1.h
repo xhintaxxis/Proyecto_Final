@@ -24,6 +24,8 @@ private:
     Fisica * movimiento;
     bool Cambio = false;
     double amplitud = 0;
+    QList<bomba *> bomb;
+    QList<rayoE *>bala;
 };
 
 #endif // ENEMIGO_1_H

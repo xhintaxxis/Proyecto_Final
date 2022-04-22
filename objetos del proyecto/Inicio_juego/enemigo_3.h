@@ -15,10 +15,13 @@ class enemigo_3:public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 private:
     Fisica * oscilacion;
+    Fisica * parabolico;
     int vida=10;
 public:
     enemigo_3(float px_,float py_,float Ampli_, QGraphicsItem* carr = 0);
     Fisica *getOscilacion() const;
+    void parabolic();
+    int cambio=0;
 public slots:
     void posicionar();
 };

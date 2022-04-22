@@ -40,10 +40,17 @@ void jefe1::posicionar()
 
 void jefe1::proyectil()
 {
-    rayoE * rayo1 = new rayoE(uniforme->getPx()-10,uniforme->getPy(),-5,0,0);
-    scene()->addItem(rayo1);
-    rayoE * rayo2 = new rayoE(uniforme->getPx()-10,uniforme->getPy()+105,-5,0,0);
-    scene()->addItem(rayo2);
-    rayoE * rayo3 = new rayoE(uniforme->getPx()-10,uniforme->getPy()+220,-5,0,0);
-    scene()->addItem(rayo3);
+    bala.append(new rayoE(uniforme->getPx()-10,uniforme->getPy(),-5,0,0));
+    scene()->addItem(bala.at(bala.size()-1));
+    bala.append(new rayoE(uniforme->getPx()-10,uniforme->getPy()+105,-5,0,0));
+    scene()->addItem(bala.at(bala.size()-1));
+    bala.append(new rayoE(uniforme->getPx()-10,uniforme->getPy()+105,-5,0,0));
+    scene()->addItem(bala.at(bala.size()-1));
+
+//    rayoE * rayo1 = new rayoE(uniforme->getPx()-10,uniforme->getPy(),-5,0,0);
+//    scene()->addItem(rayo1);
+//    rayoE * rayo2 = new rayoE(uniforme->getPx()-10,uniforme->getPy()+105,-5,0,0);
+//    scene()->addItem(rayo2);
+//    rayoE * rayo3 = new rayoE(uniforme->getPx()-10,uniforme->getPy()+220,-5,0,0);
+//    scene()->addItem(rayo3);
 }

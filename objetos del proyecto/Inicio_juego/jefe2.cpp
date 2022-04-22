@@ -37,11 +37,15 @@ void jefe2::posicionar()
 void jefe2::proyectiles()
 {
     static int cont = 0;
-    rayoE * bala = new rayoE(px,py+87,-8,0,0,0);
-    scene()->addItem(bala);
+    bala.append(new rayoE(px,py+37,-10,0,0));
+    scene()->addItem(bala.at(bala.size()-1));
+//    rayoE * bala = new rayoE(px,py+87,-8,0,0,0);
+//    scene()->addItem(bala);
     if(cont==3){
-        bomba * bomb = new bomba(px,py+37,-10,-2,1);
-        scene()->addItem(bomb);
+//        bomba * bomb = new bomba(px,py+37,-10,-2,1);
+//        scene()->addItem(bomb);
+        bomb.append(new bomba(px,py+37,-7,2,1));
+        scene()->addItem(bomb.at(bomb.size()-1));
         cont=0;
     }
     else{

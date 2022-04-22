@@ -55,7 +55,8 @@ void MainWindow::escena_1()
     lose->start(60);
     jefe1timer= new QTimer();
     connect( jefe1timer,SIGNAL(timeout()),this,SLOT(scenaBoss1()));
-    jefe1timer->start(60000);
+    jefe1timer->start(20000);
+//    ui->graphicsView->scale(0.3,0.3);
 
 }
 
@@ -80,34 +81,33 @@ void MainWindow::pre1()
 void MainWindow::enemigosS1()
 {
     if(cambio==1){
-        enemy = new Enemigo_1(1000,50,-10,0,0,0,0);
-        scene->addItem(enemy);
-        enemy12 = new Enemigo_1(1000,410,-10,0,0,0,0);
-        scene->addItem(enemy12);
-        enemy2 =new enemigo_2(900,70,-3,0,0);
-        scene->addItem(enemy2);
+        enem1.append(new Enemigo_1(1000,130,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,410,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem2.append(new enemigo_2(900,70,-3,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
         cambio=2;
     }
     else if(cambio==2){
+        enem1.append(new Enemigo_1(1000,130,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,410,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,130,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,230,-10,0,0,1,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,330,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
         cambio=3;
-        enemy = new Enemigo_1(1000,50,-10,0,0,0,0);
-        scene->addItem(enemy);
-        enemy12 = new Enemigo_1(1000,410,-10,0,0,0,0);
-        scene->addItem(enemy12);
-        Enemigo_1 * enemy13 = new Enemigo_1(1000,130,-10,0,0,0,0);
-        scene->addItem(enemy13);
-        Enemigo_1 * enemy14 = new Enemigo_1(1000,230,-10,0,0,0,0);
-        scene->addItem(enemy14);
-        Enemigo_1 * enemy15 = new Enemigo_1(1000,330,-10,0,0,0,0);
-        scene->addItem(enemy15);
     }
-
     else if(cambio==3){
-            cambio=1;
-            enemy2 =new enemigo_2(900,50,-11,0,0);
-            scene->addItem(enemy2);
-            enemigo_2 * enemy21 =new enemigo_2(900,230,-11,0,0);
-            scene->addItem(enemy21);
+        enem2.append(new enemigo_2(900,70,-7,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        enem2.append(new enemigo_2(900,230,-7,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        cambio=1;
     }
 }
 
@@ -116,6 +116,7 @@ void MainWindow::enemigosS1()
 void MainWindow::gameOver()
 {
     if(nave->vida<1){
+        nave->bala.clear();
         delete nave;
         //delete enemy;
         //delete enemy2;
@@ -128,7 +129,9 @@ void MainWindow::gameOver()
     }
     if(passBoss==1){
         if(boss1->vida<1){
+            nave->bala.clear();
             scene->removeItem(boss1);
+            boss1->bala.clear();
             delete boss1;
             //delete  nave;
             passBoss=0;
@@ -141,7 +144,10 @@ void MainWindow::gameOver()
     }
     if(passBoss==2){
         if(boss2->vida<1){
+            nave->bala.clear();
             scene->removeItem(boss2);
+            boss2->bala.clear();
+            boss2->bomb.clear();
             delete boss2;
             //delete  nave;
             //qDebug()<<"termino";
@@ -191,6 +197,10 @@ void MainWindow::scenaBoss1()
     jefe1timer->stop();
     passBoss=1;
     scen1->stop();
+    //qDebug()<<enem1.at(1)*;
+    enem1.clear();
+    enem2.clear();
+    qDebug()<<enem1.size();
 }
 
 void MainWindow::scenaBoss2()
@@ -199,6 +209,9 @@ void MainWindow::scenaBoss2()
     scene->addItem(boss2);
     jefe1timer->stop();
     passBoss=2;
+    enem1.clear();
+    enem2.clear();
+    obs.clear();
     scen1->stop();
 }
 
@@ -346,49 +359,95 @@ void MainWindow::preLoad()
 void MainWindow::enemigosS2()
 {
     if(cambio==1){
-        enemigo_2 * enemy21 = new enemigo_2(1100,50,-11,0,0);
-        scene->addItem(enemy21);
-        enemigo_2 * enemy22 =new enemigo_2(1100,230,-11,0,0);
-        scene->addItem(enemy22);
+//        enemigo_2 * enemy21 = new enemigo_2(1100,50,-11,0,0);
+//        scene->addItem(enemy21);
+//        enemigo_2 * enemy22 =new enemigo_2(1100,230,-11,0,0);
+//        scene->addItem(enemy22);
+        enem2.append(new enemigo_2(900,20,-6,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        enem2.append(new enemigo_2(900,200,-8,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
         cambio=2;
+
+
     }
     else if(cambio==2){
-        enemigo_2 * enemy21 = new enemigo_2(1070,50,-11,0,0);
-        scene->addItem(enemy21);
-        Obstaculo * obs1 = new Obstaculo(1130,250,-11,0,0);
-        scene->addItem(obs1);
+//        enemigo_2 * enemy21 = new enemigo_2(1070,50,-11,0,0);
+//        scene->addItem(enemy21);
+//        Obstaculo * obs1 = new Obstaculo(1130,250,-11,0,0);
+//        scene->addItem(obs1);
+//        cambio=3;
+        enem2.append(new enemigo_2(900,20,-7,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        obs.append(new Obstaculo(1000,250,-7,0,0));
+        scene->addItem(obs.at(obs.size()-1));
         cambio=3;
     }
     else if(cambio==3){
-        enemigo_2 * enemy21 = new enemigo_2(1070,250,-8,0,0);
-        scene->addItem(enemy21);
-        Obstaculo * obs1 = new Obstaculo(1130,50,-8,0,0);
-        scene->addItem(obs1);
+//        enemigo_2 * enemy21 = new enemigo_2(1070,250,-8,0,0);
+//        scene->addItem(enemy21);
+//        Obstaculo * obs1 = new Obstaculo(1130,50,-8,0,0);
+//        scene->addItem(obs1);
+        enem2.append(new enemigo_2(1070,200,-8,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        obs.append(new Obstaculo(1130,50,-8,0,0));
+        scene->addItem(obs.at(obs.size()-1));
         cambio=4;
     }
     else if(cambio==4) {
-        Obstaculo * obs1 = new Obstaculo(1130,0,-8,0,0);
-        scene->addItem(obs1);
-        Obstaculo * obs2 = new Obstaculo(1130,290,-8,0,0);
-        scene->addItem(obs2);
+//        Obstaculo * obs1 = new Obstaculo(1130,0,-8,0,0);
+//        scene->addItem(obs1);
+//        Obstaculo * obs2 = new Obstaculo(1130,290,-8,0,0);
+//        scene->addItem(obs2);
+        obs.append(new Obstaculo(1130,0,-17,0,0));
+        scene->addItem(obs.at(obs.size()-1));
+        obs.append(new Obstaculo(1130,290,-17,0,0));
+        scene->addItem(obs.at(obs.size()-1));
         cambio=5;
     }
-    else if(cambio==5) {
-        enemy = new Enemigo_1(1000,50,-10,0,0,0,0);
-        scene->addItem(enemy);
-        enemy12 = new Enemigo_1(1000,410,-10,0,0,0,0);
-        scene->addItem(enemy12);
-        Enemigo_1 * enemy13 = new Enemigo_1(1000,130,-10,0,0,0,0);
-        scene->addItem(enemy13);
-        Enemigo_1 * enemy14 = new Enemigo_1(1000,230,-10,0,0,0,0);
-        scene->addItem(enemy14);
-        Enemigo_1 * enemy15 = new Enemigo_1(1000,330,-10,0,0,0,0);
-        scene->addItem(enemy15);
+    else if(cambio==5){
+        obs.append(new Obstaculo(1130,0,-17,0,0));
+        scene->addItem(obs.at(obs.size()-1));
+        obs.append(new Obstaculo(1130,170,-17,0,0));
+        scene->addItem(obs.at(obs.size()-1));
+        cambio=6;
+    }
+    else if(cambio==6){
+        obs.append(new Obstaculo(1130,70,-17,0,0));
+        scene->addItem(obs.at(obs.size()-1));
+        obs.append(new Obstaculo(1130,240,-17,0,0));
+        scene->addItem(obs.at(obs.size()-1));
+        cambio=7;
+
+    }
+    else if(cambio==7) {
+//        enemy = new Enemigo_1(1000,50,-10,0,0,0,0);
+//        scene->addItem(enemy);
+//        enemy12 = new Enemigo_1(1000,410,-10,0,0,0,0);
+//        scene->addItem(enemy12);
+//        Enemigo_1 * enemy13 = new Enemigo_1(1000,130,-10,0,0,0,0);
+//        scene->addItem(enemy13);
+//        Enemigo_1 * enemy14 = new Enemigo_1(1000,230,-10,0,0,0,0);
+//        scene->addItem(enemy14);
+//        Enemigo_1 * enemy15 = new Enemigo_1(1000,330,-10,0,0,0,0);
+//        scene->addItem(enemy15);
+        enem1.append(new Enemigo_1(1000,130,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,410,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,130,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,230,-10,0,0,1,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,330,-10,0,0,0,0));
+        scene->addItem(enem1.at(enem1.size()-1));
         cambio=1;
 
     }
 
 }
+
+
 
 void MainWindow::pre3()
 {
@@ -410,23 +469,95 @@ void MainWindow::escena_3()
     cambio=1;
     scene->clear();
     scen1 = new QTimer();
-    connect(scen1,SIGNAL(timeout()),this,SLOT());
+    connect(scen1,SIGNAL(timeout()),this,SLOT(enemigosS3()));
     scen1->start(3000);
     nave = new cuerpo(100,230,0,0,0,scene,0);
     scene->addItem(nave);
-    lose = new QTimer();
-   // connect(lose,SIGNAL(timeout()),this,SLOT(gameOver()));
-    lose->start(60);
+//    lose = new QTimer();
+//    connect(lose,SIGNAL(timeout()),this,SLOT(gameOver()));
+//    lose->start(60);
     jefe1timer= new QTimer();
-    connect( jefe1timer,SIGNAL(timeout()),this,SLOT());
-    jefe1timer->start(1000);
-    boss3 = new jefe3(900,0,-3,0,0);
-    scene->addItem(boss3);
-    bolafuego * ballfire = new bolafuego();
-    scene->addItem(ballfire);
-    Enemigo_1 * prueba = new Enemigo_1(900,300,-5,-5,0,0,0);
-    scene->addItem(prueba);
+    connect( jefe1timer,SIGNAL(timeout()),this,SLOT(scenaBoss3()));
+    jefe1timer->start(1009);
+    rockreb * roca = new rockreb(810,20,0,0,1);
+    scene->addItem(roca);
+//    QTimer * timerObs = new QTimer();
+//    connect( timerObs,SIGNAL(timeout()),this,SLOT());
+//    bolafuego * ballfire = new bolafuego();
+//    scene->addItem(ballfire);
+//    Enemigo_1 * prueba = new Enemigo_1(900,300,-5,-5,0,0,0);
+    //scene->addItem(prueba);
 }
 
 
+
+void MainWindow::enemigosS3()
+{
+    if(cambio==1){
+        enem3.append(new enemigo_3(0,40,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem3.append(new enemigo_3(0,230,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem3.append(new enemigo_3(0,410,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem3.append(new enemigo_3(-60,160,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem3.append(new enemigo_3(-60,330,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+
+        cambio=2;
+    }
+    else if(cambio==2){
+        enem3.append(new enemigo_3(-160,40,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem3.append(new enemigo_3(-160,230,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem3.append(new enemigo_3(-160,410,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem1.append(new Enemigo_1(1000,130,-10,0,0,1,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,410,-10,0,0,1,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,130,-10,0,0,1,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,230,-10,0,0,1,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem1.append(new Enemigo_1(1000,330,-10,0,0,1,0));
+        scene->addItem(enem1.at(enem1.size()-1));
+        enem2.append(new enemigo_2(1030,20,-8,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        enem2.append(new enemigo_2(1030,120,-8,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        cambio=3;
+    }
+    else if(cambio==3){
+        obs.append(new Obstaculo(1130,0,-10,0,0));
+        scene->addItem(obs.at(obs.size()-1));
+        obs.append(new Obstaculo(1130,160,-10,0,0));
+        scene->addItem(obs.at(obs.size()-1));
+        enem3.append(new enemigo_3(-80,440,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem3.append(new enemigo_3(-130,440,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        enem3.append(new enemigo_3(-180,440,100));
+        scene->addItem(enem3.at(enem3.size()-1));
+        cambio=4;
+    }
+    else if(cambio==4){
+        enem2.append(new enemigo_2(900,0,-8,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        enem2.append(new enemigo_2(900,150,-8,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        enem2.append(new enemigo_2(900,300,-8,0,0));
+        scene->addItem(enem2.at(enem2.size()-1));
+        cambio=1;
+    }
+}
+void MainWindow::scenaBoss3()
+{
+    boss3 = new jefe3(900,0,-3,0,0);
+    scene->addItem(boss3);
+    jefe1timer->stop();
+    scen1->stop();
+}
 
